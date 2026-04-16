@@ -17,13 +17,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
 
-      - name: 安装 pnpm
-        run: npm install -g pnpm
+      - name: 安装 pnpm（官方推荐方式）
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9   # 或你本地的 pnpm 版本
 
       - name: 安装依赖
         run: pnpm install
 
-      - name: 构建 Astro
+      - name: 构建
         run: pnpm build
