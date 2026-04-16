@@ -1,8 +1,26 @@
----
-import { Waline } from './Waline'
-import { waline } from '@/config.json'
----
+<div id="tcomment"></div>
 
-<div>
-  {waline.serverURL && <Waline {...waline} client:visible />}
-</div>
+<script>
+  document.addEventListener('astro:page-load', () => {
+    function loadTwikoo() {
+      const commentsContainer = document.getElementById('tcomment');
+      if (commentsContainer) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.staticfile.org/twikoo/1.6.32/twikoo.all.min.js';
+        script.async = true;
+        script.onload = () => {
+          const initScript = document.createElement('script');
+          initScript.innerHTML = `
+            twikoo.init({
+                envId: '您的环境id',
+                el: '#tcomment',
+            });
+        `;
+          document.body.appendChild(initScript);
+        };
+        document.body.appendChild(script);
+      }
+    }
+    loadTwikoo();
+  });
+</script>
