@@ -3,7 +3,7 @@ name: 部署 Astro 到 GitHub Pages
 on:
   push:
     branches:
-      - main   # 如果你是 master 就改成 master
+      - main
 
 permissions:
   contents: read
@@ -11,7 +11,8 @@ permissions:
   id-token: write
 
 jobs:
-  构建:
+  build:
+    name: 🏗️ 构建
     runs-on: ubuntu-latest
 
     steps:
@@ -39,10 +40,11 @@ jobs:
         with:
           path: ./dist
 
-  部署:
-    needs: 构建
+  deploy:
+    name: 🚀 部署
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚀 部署到 Pages
+      - name: 🚀 发布到 Pages
         uses: actions/deploy-pages@v4
