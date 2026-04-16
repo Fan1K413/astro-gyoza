@@ -3,7 +3,7 @@ name: 部署 Astro 到 GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main   # 如果你是 master 就改成 master
 
 permissions:
   contents: read
@@ -31,13 +31,13 @@ jobs:
       - name: 📚 安装依赖
         run: pnpm install
 
-      - name: 🏗️ 构建项目
+      - name: 🏗️ 构建 Astro
         run: pnpm build
 
-      - name: 📤 上传构建结果
+      - name: 📤 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./dist
 
   部署:
     needs: 构建
